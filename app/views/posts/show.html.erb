@@ -1,0 +1,41 @@
+<% if notice %>
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+  <%= notice %>
+   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<% end %>
+
+<h2>Post  </h2>
+<%= render @post %>
+
+<h2>Comments</h2>
+<ul class="list-group list-group-flush">
+<% @post.comments.each do |comment| %>
+  <li class="list-group-item" style="position:relative">
+   - <strong><%= comment.commenter %></strong>: <span><%= comment.body %></span>
+  
+  </li>
+<% end %>
+</ul>
+<h2>Add a comment:</h2>
+<%= form_for([@post, @post.comments.build]) do |f| %>
+<%= hidden_field_tag :post_id, @post.id %>
+  <div class="field mb-3">
+    <%= f.label :commenter , class:"form-label"%><br />
+    <%= f.text_field :commenter , class:"form-control"%>
+  </div>
+  <div class="field mb-3">
+    <%= f.label :body , class:"form-label"%><br />
+    <%= f.text_area :body , class:"form-control"%>
+  </div>
+
+  <div class="actions mb-3">
+    <%= f.submit class:"btn btn-secondary" %>
+  </div>
+<% end %>
+<div>
+  <%= link_to "Edit this post", edit_post_path(@post) %> |
+  <%= link_to "Back to posts", posts_path %>
+
+  <%= button_to "Destroy this post", @post, method: :delete, class:"btn btn-danger mt-3" %>
+</div>
