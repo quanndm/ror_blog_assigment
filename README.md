@@ -30,3 +30,6 @@ Things you may want to cover:
 
 * Create Post Page 
 ![Create Post](./temp/create_post.png)
+
+* Edit post page
+![Edit Post](./temp/edit_post.png)
