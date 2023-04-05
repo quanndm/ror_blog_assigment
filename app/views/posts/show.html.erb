@@ -11,9 +11,9 @@
 <h2>Comments</h2>
 <ul class="list-group list-group-flush">
 <% @post.comments.each do |comment| %>
-  <li class="list-group-item" style="position:relative">
+  <li class="list-group-item" >
    - <strong><%= comment.commenter %></strong>: <span><%= comment.body %></span>
-  
+    <%= button_to "X", comment, method: :delete, class:"btn btn-danger btn_del_cmt"%>
   </li>
 <% end %>
 </ul>
@@ -39,3 +39,22 @@
 
   <%= button_to "Destroy this post", @post, method: :delete, class:"btn btn-danger mt-3" %>
 </div>
+
+<script>
+  if(typeof missingVar){
+    btn_del_cmt = document.getElementsByClassName('btn_del_cmt');
+    for (let i=0; i<btn_del_cmt.length; i++) {
+      const parent = btn_del_cmt[i].parentNode;
+      parent.style.display = "inline"
+    }
+    
+  }else{
+    let btn_del_cmt = document.getElementsByClassName('btn_del_cmt');
+    for (let i=0; i<btn_del_cmt.length; i++) {
+      const parent = btn_del_cmt[i].parentNode;
+      parent.style.display = "inline"
+    }
+  }
+  
+  
+</script>
