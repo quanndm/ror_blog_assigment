@@ -1,9 +1,4 @@
-<% if notice %>
-<div class="alert alert-info alert-dismissible fade show" role="alert">
-  <%= notice %>
-   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
-<% end %>
+
 
 <h2>Post  </h2>
 <%= render @post %>
@@ -13,16 +8,20 @@
 <% @post.comments.each do |comment| %>
   <li class="list-group-item" >
    - <strong><%= comment.commenter %></strong>: <span><%= comment.body %></span>
-    <%= button_to "X", comment, method: :delete, class:"btn btn-danger btn_del_cmt"%>
+   <% if user_signed_in?%>
+    <%= button_to "X", comment, method: :delete, class:"btn btn-link btn_del_cmt"%>
+    <% end %>
   </li>
 <% end %>
 </ul>
+<% if user_signed_in? %>
+
 <h2>Add a comment:</h2>
 <%= form_for([@post, @post.comments.build]) do |f| %>
 <%= hidden_field_tag :post_id, @post.id %>
   <div class="field mb-3">
     <%= f.label :commenter , class:"form-label"%><br />
-    <%= f.text_field :commenter , class:"form-control"%>
+    <%= f.text_field :commenter , class:"form-control bg-secondary-subtle", value:current_user.email.split('@',2)[0] , readonly: true%>
   </div>
   <div class="field mb-3">
     <%= f.label :body , class:"form-label"%><br />
@@ -37,11 +36,11 @@
   <%= link_to "Edit this post", edit_post_path(@post) %> |
   <%= link_to "Back to posts", posts_path %>
 
-  <%= button_to "Destroy this post", @post, method: :delete, class:"btn btn-danger mt-3" %>
+  <%= button_to "Destroy this post", @post, method: :delete, class:"btn btn-danger mt-3", style:"text-decoration: none" %>
 </div>
-
+<% end %>
 <script>
-  if(typeof missingVar){
+  if(typeof btn_del_cmt){
     btn_del_cmt = document.getElementsByClassName('btn_del_cmt');
     for (let i=0; i<btn_del_cmt.length; i++) {
       const parent = btn_del_cmt[i].parentNode;

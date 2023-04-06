@@ -33,3 +33,9 @@ Things you may want to cover:
 
 * Edit post page
 ![Edit Post](./temp/edit_post.png)
+
+* add condition: if not login, only see post
+![Detail Post](./temp/post1.png)
+* ![Detail Post](./temp/post2.png)
+
+* Doing: make a function to handle when user click like

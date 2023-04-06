@@ -14,10 +14,22 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     @post = Post.new
+    if current_user
+      @user = User.find(current_user.id)
+      @post.name = @user.email.split('@', 2)[0]
+    else
+      redirect_to new_user_session_path, notice: 'You are not logged in.'
+    end
+    
   end
 
   # GET /posts/1/edit
   def edit
+    if current_user
+      @user = User.find(current_user.id)
+    else
+      redirect_to new_user_session_path, notice: 'You are not logged in.'
+    end
   end
 
   # POST /posts or /posts.json
