@@ -63,7 +63,7 @@ class PostsController < ApplicationController
   # DELETE /posts/1 or /posts/1.json
   def destroy
     Comment.where(post_id: @post.id).delete_all
-    
+    Like.where(likeable_id: @post.id, likeable_type: 'Post').delete_all
     @post.destroy
 
     respond_to do |format|

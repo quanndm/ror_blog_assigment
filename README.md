@@ -38,4 +38,8 @@ Things you may want to cover:
 ![Detail Post](./temp/post1.png)
 * ![Detail Post](./temp/post2.png)
 
-* Doing: make a function to handle when user click like
+* Like function
+    - Unlike
+    ![unlike Post](./temp/unlike.png)
+    - Like
+    ![like Post](./temp/like.png)
