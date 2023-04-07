@@ -6,15 +6,16 @@ class LikesController < ApplicationController
         # logger.info params
         if user_signed_in?
 
-            like = Like.where(likeable_id: params["likeable_id"], likeable_type: params["likeable_type"], user_name: current_user.email.split("@", 2)[0]).first
+            like = Like.where(likeable_id: params["likeable_id"], likeable_type: params["likeable_type"], users_id: current_user.id).first
             if !like
-                Like.create(likeable_id: params["likeable_id"], likeable_type: params["likeable_type"], user_name: current_user.email.split("@", 2)[0])
+                Like.create(likeable_id: params["likeable_id"], likeable_type: params["likeable_type"], users_id: current_user.id)
             else
                 like.destroy
             end
 
             if  params["likeable_type"] == 'Comment'
-                redirect_to post_url(params["post_id"])
+                
+                redirect_to post_url(Comment.find(params["likeable_id"]).post.id)
             else
                 redirect_to post_url(params["likeable_id"])
             end

@@ -25,7 +25,7 @@ class CommentsController < ApplicationController
     # logger.info params[:post_id]
     # logger.info params[:comment][:commenter]
     # logger.info params[:comment][:body]
-    @comment = Comment.new(:commenter=>params[:comment][:commenter],:body=>params[:comment][:body],:post_id=>params[:post_id] )
+    @comment = Comment.create(:commenter=>params[:comment][:commenter],:body=>params[:comment][:body],:post_id=>params[:post_id] )
 
     respond_to do |format|
       if @comment.save
@@ -54,6 +54,7 @@ class CommentsController < ApplicationController
   # DELETE /comments/1 or /comments/1.json
   def destroy
     post_id = @comment.post_id
+    Like.where(likeable_id: @comment.id, likeable_type: 'Comment').delete_all
     @comment.destroy
 
     respond_to do |format|
