@@ -43,3 +43,5 @@ Things you may want to cover:
     ![unlike Post](./temp/unlike.png)
     - Like
     ![like Post](./temp/like.png)
+* Like comment
+![like Comment](./temp/like_cmt.png)

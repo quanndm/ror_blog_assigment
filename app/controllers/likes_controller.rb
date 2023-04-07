@@ -12,7 +12,12 @@ class LikesController < ApplicationController
             else
                 like.destroy
             end
-            redirect_to post_url(params["likeable_id"])
+
+            if  params["likeable_type"] == 'Comment'
+                redirect_to post_url(params["post_id"])
+            else
+                redirect_to post_url(params["likeable_id"])
+            end
         else
             redirect_to posts_url
         end
